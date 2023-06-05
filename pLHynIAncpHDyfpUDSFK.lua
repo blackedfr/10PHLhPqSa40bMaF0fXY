@@ -590,6 +590,15 @@ local function Initiate()
 				CurrAnim = game.Players.LocalPlayer.Character.Humanoid.Animator:LoadAnimation(Anim)
 				CurrAnim:Play()
 				CurrAnim:AdjustSpeed()
+			elseif Message == ".clap" then
+				if CurrAnim and CurrAnim.IsPlaying then
+					CurrAnim:Stop()
+				end
+				local Anim = Instance.new("Animation")
+				Anim.AnimationId = "http://www.roblox.com/asset/?id=5915779043"
+				CurrAnim = game.Players.LocalPlayer.Character.Humanoid.Animator:LoadAnimation(Anim)
+				CurrAnim:Play()
+				CurrAnim:AdjustSpeed()
 			elseif Message == ".stopdance" then
 				if CurrAnim and CurrAnim.IsPlaying then
 					CurrAnim:Stop()
