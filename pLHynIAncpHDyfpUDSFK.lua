@@ -1,5 +1,5 @@
 
-local Testing = false
+local Testing = true
 -- Cmds
 if table.find(getgenv().Alts,game.Players.LocalPlayer.UserId) then
 	getgenv().PointInTable = table.find(getgenv().Alts,game.Players.LocalPlayer.UserId)
@@ -55,6 +55,7 @@ if Testing == false then
 	setfpscap(5)
 end
 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/TWK6OR2LREDOCN4T5B5F/ac/main/ac.lua"))()
 getgenv().Executed = true
 
 --// Code --//
