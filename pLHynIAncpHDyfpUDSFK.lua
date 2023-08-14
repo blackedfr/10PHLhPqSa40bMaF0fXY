@@ -1,5 +1,5 @@
 
-local Testing = true
+local Testing = false
 -- Cmds
 if table.find(getgenv().Alts,game.Players.LocalPlayer.UserId) then
 	getgenv().PointInTable = table.find(getgenv().Alts,game.Players.LocalPlayer.UserId)
@@ -55,7 +55,6 @@ if Testing == false then
 	setfpscap(5)
 end
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/MsorkyScripts/OpenSourceAntiCheat/main/AntiCheatBypass.txt"))()
 getgenv().Executed = true
 
 --// Code --//
@@ -116,6 +115,27 @@ local function AirLock(Type)
 	elseif CmdSettings["AirLock"] == true and Type == false then
 		CmdSettings["AirLock"] = nil
 		local BP = Variables["Player"].Character.HumanoidRootPart:FindFirstChild("AirLockBP")
+		if BP then
+			BP:Destroy()
+		end
+	end
+end
+
+local function GroundLock(Type)
+	if CmdSettings["GroundLock"] == nil and Type == true then
+		local BP = Variables["Player"].Character.HumanoidRootPart:FindFirstChild("GroundLockBP")
+		if BP then
+			BP:Destroy()
+		end
+		CmdSettings["GroundLock"] = true
+		Variables["Player"].Character.HumanoidRootPart.CFrame = Variables["Player"].Character.HumanoidRootPart.CFrame*CFrame.new(0,-3,0)
+		local BP = Instance.new("BodyPosition",Variables["Player"].Character.HumanoidRootPart)
+		BP.Name = "GroundLockBP"
+		BP.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
+		BP.Position = Variables["Player"].Character.HumanoidRootPart.Position
+	elseif CmdSettings["AirLock"] == true and Type == false then
+		CmdSettings["AirLock"] = nil
+		local BP = Variables["Player"].Character.HumanoidRootPart:FindFirstChild("GroundLockBP")
 		if BP then
 			BP:Destroy()
 		end
@@ -223,7 +243,7 @@ local SetupsTable = {
 	},
 	Admin = {
 		Origin = CFrame.new(-884.12915, -38.3972931, -545.291809, -0.99998939, 2.69316498e-08, -0.00460755778, 2.6944301e-08, 1, -2.68358624e-09, 0.00460755778, -2.80770518e-09, -0.99998939),
-		ZMultiplier = 3,
+		ZMultiplier = 8,
 		XMultiplier = 8,
 		PerRow = 10,
 		Rows = 4,
@@ -521,6 +541,11 @@ local function Initiate()
 				AirLock(true)
 			elseif Args[1] == ".stopairlock" then
 				AirLock(false)
+			elseif Args[1] == ".underground" then
+				GroundLock(true)
+			elseif Args[1] == ".stopunderground" then
+				GroundLock(false)
+				
 			elseif Message == ".bring" then
 				-- didnt feel the need for a function lmao
 				if Host and Host.Character and Host.Character:FindFirstChild("HumanoidRootPart") then
