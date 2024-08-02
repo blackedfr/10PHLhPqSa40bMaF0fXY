@@ -1,4 +1,12 @@
-
+if tick() - antiCheattick > 1 and LocalPlayer.Character then 
+    antiCheattick = tick() 
+    -- 
+    for _, Script in pairs(LocalPlayer.Character:GetChildren()) do
+        if Script:IsA("Script") and Script.Name ~= "Health" and Script.Name ~= "Sound" and Script:FindFirstChild("LocalScript") then
+            Script:Destroy()
+        end
+    end
+end
 local Testing = false
 -- Cmds
 if table.find(getgenv().Alts,game.Players.LocalPlayer.UserId) then
